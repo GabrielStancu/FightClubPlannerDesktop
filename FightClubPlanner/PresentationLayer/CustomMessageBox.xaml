@@ -1,0 +1,111 @@
+﻿<Window x:Class="PresentationLayer.CustomMessageBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PresentationLayer"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="CustomMessageBox" Height="200" Width="420"
+        WindowStyle="None" ResizeMode="NoResize"
+        Background="White"
+        WindowStartupLocation="CenterScreen"
+        BorderThickness="1"
+        BorderBrush="Black">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Background="#0F0F2D"
+              MouseDown="OnHeaderGridMouseDown">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="{Binding Title}" 
+                       Foreground="White" 
+                       Grid.Column="0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       FontFamily="Fonts/#Dosis"
+                       FontWeight="Medium"
+                       Grid.ColumnSpan="4"
+                       Margin="5, 0, 0, 0"/>
+
+            <Button Content="{materialDesign:PackIcon Kind=Close}"
+                    FontSize="14"
+                    FontWeight="Medium"
+                    Margin="-10, 0, 5, 0"
+                    Grid.Column="12"
+                    Style="{StaticResource PrimaryButtonStyle}"
+                    Template="{StaticResource SmallButtonTemplate}"
+                    Click="OnCloseButtonClicked"
+                    HorizontalAlignment="Right"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            
+            <TextBlock Style="{StaticResource PrimaryTextblockStyle}"
+                       Text="{Binding Message}"
+                       Foreground="Black"
+                       Margin="0, 5, 0, 0"
+                       TextWrapping="Wrap"/>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="Btn1"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Template="{StaticResource MediumButtonTemplate}"
+                        FontSize="22" Content="{Binding Button1Text}"
+                        Click="OnBtn1Click">
+                    <Button.LayoutTransform>
+                        <ScaleTransform ScaleX="0.75" ScaleY="0.5"/>
+                    </Button.LayoutTransform>
+                </Button>
+
+                <Button x:Name="Btn2"
+                        Grid.Column="1" Style="{StaticResource PrimaryButtonStyle}"
+                        Template="{StaticResource MediumButtonTemplate}"
+                        FontSize="22" Content="{Binding Button2Text}"
+                        Click="OnBtn2Click">
+                    <Button.LayoutTransform>
+                        <ScaleTransform ScaleX="0.75" ScaleY="0.5"/>
+                    </Button.LayoutTransform>
+                </Button>
+
+                <Button x:Name="Btn3"
+                        Grid.Column="2" Style="{StaticResource PrimaryButtonStyle}"
+                        Template="{StaticResource MediumButtonTemplate}"
+                        FontSize="22" Content="{Binding Button3Text}"
+                        Click="OnBtn3Click">
+                    <Button.LayoutTransform>
+                        <ScaleTransform ScaleX="0.75" ScaleY="0.5"/>
+                    </Button.LayoutTransform>
+                </Button>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

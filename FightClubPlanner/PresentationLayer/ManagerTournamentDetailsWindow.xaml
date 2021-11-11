@@ -1,0 +1,153 @@
+﻿<Window x:Class="PresentationLayer.ManagerTournamentDetailsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PresentationLayer"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="ManagerTournamentDetailsWindow" Height="1000" Width="1800"
+        WindowStyle="None" ResizeMode="NoResize"
+        Background="#8d99ae"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Background="#0F0F2D"
+              MouseDown="OnHeaderGridMouseDown">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Fight Club Planner" 
+                       Foreground="White" 
+                       Grid.Column="0"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       FontFamily="Fonts/#Dosis"
+                       FontWeight="Medium"
+                       Grid.ColumnSpan="3"
+                       Margin="-300, 0, 0, 0"/>
+
+            <Button Content="{materialDesign:PackIcon Kind=ArrowBack}"
+                    FontSize="14"
+                    FontWeight="Medium"
+                    Margin="10, 0, -97, 0"
+                    Grid.Column="11"
+                    Style="{StaticResource PrimaryButtonStyle}"
+                    Template="{StaticResource SmallButtonTemplate}"
+                    Click="OnBackButtonClicked"
+                    Background="#ffd166"
+                    HorizontalAlignment="Right"/>
+
+            <Button Content="{materialDesign:PackIcon Kind=Close}"
+                    FontSize="14"
+                    FontWeight="Medium"
+                    Margin="10, 0, 10, 0"
+                    Grid.Column="12"
+                    Style="{StaticResource PrimaryButtonStyle}"
+                    Template="{StaticResource SmallButtonTemplate}"
+                    Click="OnCloseButtonClicked"
+                    HorizontalAlignment="Right"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" Grid.Column="0" Background="#0F0F2D" Margin="10" CornerRadius="10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Grid.Row="0" Grid.Column="0" Style="{StaticResource SecondaryBorderStyle}" Margin="10, 34">
+                        <ComboBox x:Name="cboFighters" Text="Pick fighter" ItemsSource="{Binding InvitableFighters}" DisplayMemberPath="FullName"
+                      SelectedItem="{Binding CurrentFighter}" Style="{StaticResource ComboBoxFlatStyle}"
+                              Margin="10, 5" FontSize="30"/>
+                    </Border>
+
+                    <Button Content="Invite" Grid.Row="0" Grid.Column="1" Click="OnInviteButtonClicked"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Template="{StaticResource MediumButtonTemplate}"
+                        FontSize="30">
+                        <Button.LayoutTransform>
+                            <ScaleTransform ScaleX="2.25" ScaleY="1.5"/>
+                        </Button.LayoutTransform>
+                    </Button>
+                    <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource PrimaryBorderStyle}"
+                            CornerRadius="10" Margin="10, 30">
+                        <DatePicker Text="Start date" SelectedDate="{Binding SelectedDate}"
+                                Style="{StaticResource DatePickerStyle}" Margin="5"
+                                    BorderThickness="0" VerticalAlignment="Center"
+                                    SelectedDateChanged="OnSelectedDateChanged">
+                            <DatePicker.LayoutTransform>
+                                <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
+                            </DatePicker.LayoutTransform>
+                        </DatePicker>
+                    </Border>
+
+                    <Button Content="Generate" Grid.Row="1" Grid.Column="1" Click="OnGenerateButtonClicked"
+                            Style="{StaticResource PrimaryButtonStyle}" Template="{StaticResource MediumButtonTemplate}"
+                            FontSize="30">
+                        <Button.LayoutTransform>
+                            <ScaleTransform ScaleX="2.25" ScaleY="1.5"/>
+                        </Button.LayoutTransform>
+                    </Button>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="1" Grid.Column="0" Background="#0F0F2D" Margin="10" CornerRadius="10">
+                <DataGrid ItemsSource="{Binding DisplayFighters}" AutoGenerateColumns="False" Margin="10">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Fighter Name" Binding="{Binding FullName}" Width="2*"/>
+                        <DataGridTextColumn Header="Age" Binding="{Binding Age}" Width="*"/>
+                        <DataGridTextColumn Header="Weight" Binding="{Binding Weight}" Width="*"/>
+                        <DataGridTextColumn Header="Height" Binding="{Binding Height}" Width="*"/>
+                        <DataGridCheckBoxColumn Header="Eligible" Binding="{Binding IsEligible}" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Border>
+
+            <Border Grid.Column="1" Grid.RowSpan="2" Background="#0F0F2D" Margin="10" CornerRadius="10">
+                <DataGrid x:Name="FightsGrid" ItemsSource="{Binding DisplayFights}" AutoGenerateColumns="False"
+                  SelectedItem="{Binding SelectedFight}" SelectionChanged="OnFightDataGridSelectionChanged"
+                          Margin="10">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="First Fighter" Binding="{Binding Fighter1.FullName}" Width="2*"/>
+                        <DataGridTextColumn Header="Second Fighter" Binding="{Binding Fighter2.FullName}" Width="2*"/>
+                        <DataGridTextColumn Header="Date" Binding="{Binding FightTime, StringFormat=\{0:dd.MM.yyyy\}}" Width="*"/>
+                        <DataGridTextColumn Header="Winner" Binding="{Binding Winner.FullName}" IsReadOnly="{Binding ReadOnlyWinner}" Width="2*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Border>
+            
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,86 @@
+﻿<Window x:Class="PresentationLayer.AddIsolationBubbleWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PresentationLayer"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="AddIsolationBubbleWindow" Height="300" Width="600"
+        WindowStyle="None" ResizeMode="NoResize"
+        Background="#8d99ae"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Background="#0F0F2D"
+              MouseDown="OnHeaderGridMouseDown">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Fight Club Planner" 
+                       Foreground="White" 
+                       Grid.Column="0"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       FontFamily="Fonts/#Dosis"
+                       FontWeight="Medium"
+                       Grid.ColumnSpan="3"
+                       Margin="5, 0, 0, 0"/>
+
+            <Button Content="{materialDesign:PackIcon Kind=Close}"
+                    FontSize="14"
+                    FontWeight="Medium"
+                    Margin="10, 0, 0, 0"
+                    Grid.Column="12"
+                    Style="{StaticResource PrimaryButtonStyle}"
+                    Template="{StaticResource SmallButtonTemplate}"
+                    Click="OnCloseButtonClicked"/>
+        </Grid>
+
+        <Border Margin="25, 25" Grid.Row="1" Background="#181735" CornerRadius="20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="1.5*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Bubble Name:" Grid.Row="0" Grid.Column="0"
+                           Style="{StaticResource PrimaryTextblockStyle}"/>
+                <Border Grid.Row="0" Grid.Column="1"
+                            Style="{StaticResource PrimaryBorderStyle}"
+                            Margin="-30, 10, 20, 10">
+                    <TextBox x:Name="IsolationBubbleTextBox" Text="{Binding BubbleName}"
+                                 Style="{StaticResource PrimaryTextBoxStyle}"/>
+                </Border>
+
+                <Button Content="Add Bubble" Grid.Row="1" Grid.ColumnSpan="2" Click="OnAddBubbleButtonClicke"
+                            Style="{StaticResource PrimaryButtonStyle}"
+                            Template="{StaticResource MediumButtonTemplate}"
+                            FontSize="30"/>
+            </Grid>
+        </Border>
+
+    </Grid>
+</Window>
